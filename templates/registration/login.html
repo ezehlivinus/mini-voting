@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %} Login {% endblock title %}
+
+{% block content %}
+
+
+<form method="post">
+
+    {% csrf_token %}
+    <div class="row">
+
+        <div class="col-md-2"></div>
+
+            <div class="col-md-8 shadow">
+                <h3>Login</h3>
+                        <span style="color: red">{{form.non_field_errors}}</span>
+
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">Welcome!</h4>
+                    <p>
+                        <div class="form-group">
+
+                            <label for="id_username">Username<span class="error">{{form.username.errors}}</span></label>
+                            <input type="text" class="form-control" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="30" required id="id_username">
+                            <small id="usernameHelp" class="helptext form-text text-muted">
+                            Should be in this form: 2000/123456
+                            </small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="id_password">Password<span class="error">{{form.password.errors}}</span></label>
+                            <input type="password" name="password" class="form-control" autocomplete="current-password" required id="id_password">
+                            <small id="id_password"  class="helptext form-text text-muted">
+                            
+                            </small>
+                        </div>
+
+                    </p>
+                    <hr>
+                    <p class="mb-0">When you are ready proceed to login</p>
+                </div>
+
+                    <button class="btn btn-primary" type="submit">Login</button>
+                    <br>
+                <br>
+            </div>
+        <div class="col-md-2"></div>
+
+    </div>
+</form>
+{% endblock content %}

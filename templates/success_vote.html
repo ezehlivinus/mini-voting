@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock title %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-md-2"></div>
+
+            <div class="col-md-8 shadow">
+                <h3>Alert!</h3>
+                {% if user.is_authenticated %}
+
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-text">{{ student }}</h4>
+
+                    {% if voted %}
+                        <h4 class="alert-heading">You have already voted for the selected candidate or position</h4>
+                    
+                    {% else %}
+                    <h4 class="alert-heading">Success! Thanks for voting!</h4>
+                    {% endif %}
+
+
+                </div>
+                
+                <a href="{% url 'polling_unit' %}" onclick="" class="btn btn-primary">Back to Polling Unit</a>
+
+                {% else %}
+
+                {% endif %}
+
+                
+
+                <br>
+                <br>
+            </div>
+        <div class="col-md-2"></div>
+
+    </div>
+
+    {% comment %} {% if user.is_authenticated %}
+        Hi {{ user.username }}!
+        <p>
+            <a href="{% url 'logout' %}">Logout</a>
+        </p>
+
+    {% else %}
+        <p>You are not logged in</p>
+        <a href=" {% url 'login' %} ">Login<a/>
+        <a href="{% url 'signup' %}">Signup</a>
+    {% endif %} {% endcomment %}
+
+{% endblock content %}
+
+

@@ -1,0 +1,156 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Home {% endblock title %}
+
+{% block extra-head %}
+<style>
+
+.card {
+    margin-bottom: 20px;
+}
+
+.vote-btn {
+    display: none;
+}
+
+</style>
+{% endblock extra-head %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-md-1"></div>
+
+            <div class="col-md-10 shadow">
+                
+                <div class="alert alert-light" role="alert">
+                
+                <h3><strong>Polling Unit</strong></h3>
+                    
+                    <h4 class="alert-heading">Welcome!</h4>
+                    <p> 
+                        You are voting as <strong>{{ student }}</strong> if this is not you contact an exco
+                    </p>
+                    <p>
+                        Some info goes here! 
+                    </p>
+                    <hr>
+                        {% comment %} dropdown menu {% endcomment %}
+            
+                            <p>
+                                <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Vote for
+                            </button>
+                            <div class="dropdown-menu">
+                                {% for position in positions %}
+                            <a class="dropdown-item" href="{% url 'polling_unit' %}?p={{ position.name.lower }}">{{ position.name.title }}</a>
+
+                                {% empty %}
+                                
+                                {% endfor %}
+                                
+                            </div>
+                            </div>
+                            </p>
+                        
+                        {% comment %} end dropdown menu {% endcomment %}
+                        
+                    <hr>
+                    <p class="mb-0">
+                    {% comment %} form {% endcomment %}
+                    <form method="post" action="{% url 'vote' %}">
+
+                        {% csrf_token %}
+                    <div class="row">                    
+
+                        {% for choice in choices %}
+                        
+                        <div class="col-sm-6">
+                                <div class="card">
+                                <div class="card-body">
+                                    <img class="img-thumbnail img-fluid" src="{{ choice.candidate.avater.url }}" alt="choice one"/>
+                                    <br/>
+                                    <br/>
+                                    <h5 class="card-title">{{ choice.candidate }}</h5>
+                                    <p class="card-text">
+                                    {{ choice.description }}
+                                    </p>
+                                    {% comment %} <a href="#" class="btn btn-primary">Go somewhere</a> {% endcomment %}
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" required id="customRadioInline2" value={{choice.id}} name="choice_id" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadioInline2">Vote</label>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        
+                        {% empty %}
+                        
+                        <h3>No candidate yet</h3>
+                        
+                        {% endfor %}
+                            
+                            <!--div class="col-sm-6">
+                                <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Special title treatment</h5>
+                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                    {% comment %} <a href="#" class="btn btn-primary">Go somewhere</a> {% endcomment %}
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="customRadioInline5" name="customRadioInline1" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadioInline5">Ezeh2</label>
+                                    </div>
+                                </div>
+                                </div>
+                            </div-->
+
+                            </div><!--end row-->
+                            
+                        </p>
+                
+                        <button  class="btn btn-primary vote-btn">Vote</button>
+                </div>
+                    </form>
+
+                {% comment %} <a href="{% url 'register' %}" onclick="" class="btn btn-primary">Registration</a>
+                <a href="{% url 'login' %}" onclick="" class="btn btn-primary">Login</a> {% endcomment %}
+
+       
+            </div>
+        <div class="col-md-1"></div>
+
+    </div>
+    <br>
+    <br>
+    <br>
+    {% comment %} {% if user.is_authenticated %}
+        Hi {{ user.username }}!
+        <p>
+            <a href="{% url 'logout' %}">Logout</a>
+        </p>
+
+    {% else %}
+        <p>You are not logged in</p>
+        <a href=" {% url 'login' %} ">Login<a/>
+        <a href="{% url 'signup' %}">Signup</a>
+    {% endif %} {% endcomment %}
+
+{% endblock content %}
+
+{% block extra-script %}
+<script>
+
+let voteBtn = document.querySelector('.vote-btn');
+
+$('.custom-control-label').click((even)=>{
+    let text = $(even.target).text();
+    voteBtn.textContent = `Vote for ${text}`;
+    voteBtn.style.display = 'block';
+});
+
+</script>
+{% endblock extra-script %}

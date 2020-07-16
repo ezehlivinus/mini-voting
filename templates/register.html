@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %} Sign Up {% endblock title %}
+
+{% block extra-head %}
+<style>
+    .error {
+        color: darkred;
+    }
+</style>
+{% endblock extra-head %}
+
+{% block content %}
+
+    <form method="post">
+
+    {% csrf_token %}
+    {% comment %} {{ form.as_p }} {% endcomment %}
+
+        <div class="row">
+
+        <div class="col-md-2"></div>
+
+            <div class="col-md-8 shadow">
+                <h3>Voters Registration</h3>
+
+                        
+                <div class="alert alert-success" role="alert">
+
+                        {{form.non_field_errors}}
+                    <h4 class="alert-heading">Welcome!</h4>
+                    <p>
+                        
+                        <div class="form-group">
+                            <label for="id_email">Email address <span class="error">{{form.email.errors}}</span></label>
+                            <input type="email" autofocus class="form-control" name="email" maxlength="254" id="id_email" aria-describedby="emailHelp">
+                            <small id="emailHelp" class="form-text text-muted">
+                            
+                            </small>
+                        </div>
+                        <div class="form-group">
+
+                            <label for="id_username">Username<span class="error">{{form.username.errors}}</span></label>
+                            
+                            <input type="text"  placeholder="Enter your matric number" class="form-control" name="username" maxlength="150" autocapitalize="none" autocomplete="username" required id="id_username" aria-describedby="usernameHelp">
+                            <small id="usernameHelp" class="helptext form-text text-muted">
+                            Should be in this form: 2000/123456
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_password1">Password<span class="error">{{form.password1.errors}}</span></label>
+                            <input type="password" class="form-control" name="password1" autocomplete="new-password" required id="id_password1">
+                            <small id="id_password1" class="form-text text-muted">
+                            
+                                <ul>
+                                    <li>Your password can’t be too similar to your other personal information.</li>
+                                    <li>Your password must contain at least 8 characters.</li>
+                                    <li>Your password can’t be a commonly used password.</li>
+                                    <li>Your password can’t be entirely numeric.</li>
+                                </ul>
+                            </small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="id_password2">Password confirmation<span class="error">{{form.password2.errors}}</span></label>
+                            <input type="password" name="password2" class="form-control" autocomplete="new-password" required id="id_password2">
+                            <small id="id_password2"  class="helptext form-text text-muted">
+                            Enter the same password as before, for verification.
+                            </small>
+                        </div>
+
+                    </p>
+                    <hr>
+                    <p class="mb-0">When you are ready proceed to registration</p>
+                </div>
+
+                <button  class="btn btn-primary">Register</button>
+                <br>
+                <br>
+            </div>
+        <div class="col-md-2"></div>
+
+    </div>
+
+
+    </form>
+{% endblock content %}
+
+{% block extra-script %}
+ <script>
+
+ </script>
+{% endblock extra-script %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock title %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-md-2"></div>
+
+            <div class="col-md-8 shadow">
+                <h3>Some information</h3>
+
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">Welcome!</h4>
+                    <p>
+                        Some info goes here!
+                    </p>
+                    <hr>
+                    <p class="mb-0">When you are ready proceed to below</p>
+                </div>
+                {% if user.is_authenticated %}
+                <a href="{% url 'polling_unit' %}" onclick="" class="btn btn-primary">Polling Unit</a>
+
+                {% else %}
+
+                <a href="{% url 'register' %}" onclick="" class="btn btn-primary">Registration</a>
+                {% comment %} <a href="{% url 'login' %}" onclick="" class="btn btn-primary">Login</a> {% endcomment %}
+                {% endif %}
+
+                <br>
+                <br>
+            </div>
+        <div class="col-md-2"></div>
+
+    </div>
+
+    {% comment %} {% if user.is_authenticated %}
+        Hi {{ user.username }}!
+        <p>
+            <a href="{% url 'logout' %}">Logout</a>
+        </p>
+
+    {% else %}
+        <p>You are not logged in</p>
+        <a href=" {% url 'login' %} ">Login<a/>
+        <a href="{% url 'signup' %}">Signup</a>
+    {% endif %} {% endcomment %}
+
+{% endblock content %}
+
+

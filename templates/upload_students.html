@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %} Change Paasowrd {% endblock title %}
+
+{% block content %}
+
+{% if message %}
+
+<h3>{{success}} Successfully uploaded</h3>
+<h3>{{error}} already exist</h3>
+    
+{% endif %}
+
+<form method="post" action="{% url 'upload' %}">
+
+    {% csrf_token %}
+
+    <p>Choose a department and  Click to upload file students list</p>
+    <select required class="custom-select form-control" name="department">
+    {% for department in departments %}
+        <option value="{{ department.id }}">{{department.name}}</option>
+    {% empty %}
+    <h3>No department</h3>
+    {% endfor %}
+
+    </select>
+    <small>If the department does not exist create it at the admin page</small>
+    <br/>
+    <br/>
+
+    {% if not departments %}
+    
+    {% else %}
+    <button class="btn btn-primary" type="submit">Upload students details</button>
+    {% endif %}
+</form>
+
+
+
+{% endblock %}
